@@ -62,7 +62,6 @@ describe('[Exercise 4] Counter', () => {
     it('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
         //The first call of countdown should return the number 3
         let expected = 3
-        
         //result
         expect(counter.countDown()).toBe(expected)
     })
@@ -70,7 +69,6 @@ describe('[Exercise 4] Counter', () => {
     it('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
         //Expected return (per example)
         let expected = 2
-        //Call Once
         counter.countDown()
         //Expect
         expect(counter.countDown()).toBe(expected)
@@ -90,60 +88,97 @@ describe('[Exercise 4] Counter', () => {
 })
 
 describe('[Exercise 5] Seasons', () => {
-  let seasons
-  beforeEach(() => {
-    seasons = new utils.Seasons() // each test must start with fresh seasons
-  })
-  it('[9] the FIRST call of seasons.next returns "summer"', () => {
-    // ✨ test away
-  })
-  it('[10] the SECOND call of seasons.next returns "fall"', () => {
-    // ✨ test away
-  })
-  it('[11] the THIRD call of seasons.next returns "winter"', () => {
-    // ✨ test away
-  })
-  it('[12] the FOURTH call of seasons.next returns "spring"', () => {
-    // ✨ test away
-  })
-  it('[13] the FIFTH call of seasons.next returns again "summer"', () => {
-    // ✨ test away
-  })
-  it('[14] the 40th call of seasons.next returns "spring"', () => {
-    // ✨ test away
-  })
+    let seasons
+
+    beforeEach(() => {
+        seasons = new utils.Seasons() // each test must start with fresh seasons
+    })
+
+    it('[9] the FIRST call of seasons.next returns "summer"', () => {
+        expect(seasons.next()).toMatch('summer')
+    })
+
+    it('[10] the SECOND call of seasons.next returns "fall"', () => {
+        for(let i = 0 ; i < 1 ; i++){
+        seasons.next()
+        }
+        expect(seasons.next()).toMatch('fall')
+        })
+
+    it('[11] the THIRD call of seasons.next returns "winter"', () => {
+        for(let i = 0 ; i < 2 ; i++){
+        seasons.next()
+        }
+        expect(seasons.next()).toMatch('winter')
+    })
+
+    it('[12] the FOURTH call of seasons.next returns "spring"', () => {
+        for(let i = 0 ; i < 3 ; i++){
+        seasons.next()
+        }
+        expect(seasons.next()).toMatch('spring')
+    })
+
+    it('[13] the FIFTH call of seasons.next returns again "summer"', () => {
+        for(let i = 0 ; i < 4 ; i++){
+        seasons.next()
+        }
+        expect(seasons.next()).toMatch('summer')
+    })
+
+    it('[14] the 40th call of seasons.next returns "spring"', () => {
+        for(let i = 0 ; i < 39 ; i++){
+        seasons.next()
+        }
+        expect(seasons.next()).toMatch('spring')
+    })
+
 })
 
 describe('[Exercise 6] Car', () => {
-  let focus
-  beforeEach(() => {
-    focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
-  })
-  it('[15] driving the car returns the updated odometer', () => {
-    // ✨ test away
-  })
-  it('[16] driving the car uses gas', () => {
-    // ✨ test away
-  })
-  it('[17] refueling allows to keep driving', () => {
-    // ✨ test away
-  })
-  it('[18] adding fuel to a full tank has no effect', () => {
-    // ✨ test away
-  })
+    let focus
+    beforeEach(() => {
+        focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
+    })
+    it('[15] driving the car returns the updated odometer', () => {
+        focus.drive(100)
+        expect(focus.odometer).toBe(100)
+    })
+    it('[16] driving the car uses gas', () => {
+        focus.drive(100)
+        expect(focus.tank).toBeLessThan(30)
+    })
+    it('[17] refueling allows to keep driving', () => {
+        focus.drive(600)
+        expect(focus.tank).toEqual(0)
+        focus.refuel(10)
+        expect(focus.tank).toEqual(10)
+    })
+    it('[18] adding fuel to a full tank has no effect', () => {
+        focus.refuel(10)
+        expect(focus.tank).toEqual(20)
+    })
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
-  it('[19] resolves true if passed an even number', () => {
-    // ✨ test away
-  })
-  it('[20] resolves false if passed an odd number', () => {
-    // ✨ test away
-  })
-  it('[21] rejects an error with the message "number must be a number" if passed a non-number type', () => {
-    // ✨ test away
-  })
-  it('[22] rejects an error with the message "number must be a number" if passed NaN', () => {
-    // ✨ test away
-  })
+
+    it('[19] resolves true if passed an even number', async() => {
+        const determination = await utils.isEvenNumberAsync(40)
+        expect(determination).toBe(true)
+    })
+
+    it('[20] resolves false if passed an odd number', async() => {
+        const determination = await utils.isEvenNumberAsync(39)
+        expect(determination).toBe(false)
+    })
+
+    it('[21] rejects an error with the message "number must be a number" if passed a non-number type', async() => {
+        const determination = await utils.isEvenNumberAsync('joke')
+        expect(determination).toBe("number must be a number")
+    })
+
+    it('[22] rejects an error with the message "number must be a number" if passed NaN', async() => {
+        const determination = await utils.isEvenNumberAsync(true)
+        expect(determination).toBe("number must be a number")
+    })
 })

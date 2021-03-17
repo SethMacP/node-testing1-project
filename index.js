@@ -81,12 +81,12 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
-    this.index = 0
+    this.index = -1
     this.seasons = [
         'summer',
         'fall',
         'winter',
-        'sprint'
+        'spring'
     ]
   }
 
@@ -122,6 +122,8 @@ class Car {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+    this.mpg = mpg
+    this.maxFuel = tankSize
   }
 
   /**
@@ -131,14 +133,19 @@ class Car {
    *
    * EXAMPLE
    * const focus = new Car('focus', 20, 30)
+   * //                     (name, tank size, mpg)
+   * 
    * focus.drive(100) // returns 100
    * focus.drive(100) // returns 200
    * focus.drive(100) // returns 300
    * focus.drive(200) // returns 500
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
+   *                        
    */
   drive(distance) {
-    // ✨ implement
+    this.odometer =+ distance;
+    this.tank = this.tank - (distance / this.mpg);
+    return this.odometer
   }
 
   /**
@@ -153,7 +160,11 @@ class Car {
    * focus.refuel(99) // returns 600 (tank only holds 20)
    */
   refuel(gallons) {
-    // ✨ implement
+    if((gallons + this.tank) <= this.maxFuel){ 
+        return this.tank += gallons
+    }else{
+        return this.tank
+    }
   }
 }
 
@@ -176,8 +187,12 @@ class Car {
  *    // error.message is "number must be a number"
  * })
  */
-function isEvenNumberAsync(number) {
-  // ✨ implement
+async function isEvenNumberAsync(number) {
+    if(typeof number != 'number' || !number){
+        return "number must be a number"
+    }
+    return (number % 2 === 0 ? true : false)
+
 }
 
 module.exports = {

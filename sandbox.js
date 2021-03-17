@@ -1,28 +1,23 @@
 const utils = require('./index')
 
-let counter = new utils.Counter(3)
+let seasons = new utils.Seasons()
 
-console.log(counter);
-//first call
-counter.countDown();
-console.log(counter)
+console.log(seasons)
 
-counter.countDown();
-console.log(counter)
+console.log(seasons.next());
+console.log(seasons)
 
-counter.countDown();
-console.log(counter)
+console.log(seasons.next());
+console.log(seasons)
 
-counter.countDown();
-console.log(counter)
+console.log(seasons.next());
+console.log(seasons)
 
-counter.countDown();
-console.log(counter)
+console.log(seasons.next());
+console.log(seasons)
 
-
-
-
-
+console.log(seasons.next());
+console.log(seasons)
 
 
 
