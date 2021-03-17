@@ -8,6 +8,11 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+  const newObj = {}
+  for(var key in obj){
+      newObj[key] = obj[key].trim();
+  }
+  return newObj
 }
 
 /**
@@ -20,6 +25,10 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
+    for(var key in obj){
+        obj[key] = obj[key].trim();
+    }
+    return obj
 }
 
 /**
@@ -32,6 +41,8 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+ let highestNumber =  Math.max(...integers)
+ return highestNumber;
 }
 
 class Counter {
@@ -39,8 +50,11 @@ class Counter {
    * [Exercise 4A] Counter creates a counter
    * @param {number} initialNumber - the initial state of the count
    */
+
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.currentCount = initialNumber + 1
+
   }
 
   /**
@@ -55,17 +69,25 @@ class Counter {
    * counter.countDown() // returns 0
    * counter.countDown() // returns 0
    */
-  countDown() {
-    // ✨ implement
-  }
-}
+    countDown() {
+        this.currentCount -= 1
+        return (this.currentCount >= 1 ? this.currentCount : 0)
 
+    }
+}
 class Seasons {
   /**
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.index = 0
+    this.seasons = [
+        'summer',
+        'fall',
+        'winter',
+        'sprint'
+    ]
   }
 
   /**
@@ -80,9 +102,13 @@ class Seasons {
    * seasons.next() // returns "spring"
    * seasons.next() // returns "summer"
    */
-  next() {
-    // ✨ implement
-  }
+    next() {
+        this.index += 1
+        if(this.index > 3){
+            this.index = 0
+        }
+        return this.seasons[this.index]
+    }
 }
 
 class Car {

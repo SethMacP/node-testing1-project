@@ -1,47 +1,92 @@
 const utils = require('./index')
 
 describe('[Exercise 1] trimProperties', () => {
-  it('[1] returns an object with the properties trimmed', () => {
-    // EXAMPLE
-    const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
-    const expected = { foo: 'foo', bar: 'bar', baz: 'baz' }
-    const actual = utils.trimProperties(input)
-    expect(actual).toEqual(expected)
-  })
-  it('[2] returns a copy, leaving the original object intact', () => {
-    // ✨ test away
-  })
+    let input = {}
+    let expected = {}
+
+    beforeEach(()=>{
+        input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
+        expected = { foo: 'foo', bar: 'bar', baz: 'baz' }
+    })
+    it('[1] returns an object with the properties trimmed', () => {
+        const actual = utils.trimProperties(input)
+        expect(actual).toEqual(expected)
+    })
+    it('[2] returns a copy, leaving the original object intact', () => {
+        const copyObject = utils.trimProperties(input)
+        expect(input).not.toEqual(copyObject)
+    })
 })
 
 describe('[Exercise 2] trimPropertiesMutation', () => {
+
+    let input = {}
+    let expected = {}
+
+    beforeEach(()=>{
+        input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
+        expected = { foo: 'foo', bar: 'bar', baz: 'baz' }
+    })
+
   it('[3] returns an object with the properties trimmed', () => {
-    // ✨ test away
+    const mutation = utils.trimPropertiesMutation(input)
+    expect(input).toEqual(mutation)
   })
+
   it('[4] the object returned is the exact same one we passed in', () => {
-    // ✨ test away
+    const mutation = utils.trimPropertiesMutation(input)
+    expect(input).toBe(mutation)
+    expect(input).toEqual(mutation)
+    //Just to be really, really sure
+    expect(input).toStrictEqual(mutation)
   })
 })
 
 describe('[Exercise 3] findLargestInteger', () => {
   it('[5] returns the largest number in an array of numbers', () => {
-    // ✨ test away
+    const arrayOfNumbers = [10,90,40,70,88,12]
+    const expected = utils.findLargestInteger(arrayOfNumbers)
+    expect(expected).toEqual(90)
+
   })
 })
 
 describe('[Exercise 4] Counter', () => {
-  let counter
-  beforeEach(() => {
-    counter = new utils.Counter(3) // each test must start with a fresh couter
-  })
-  it('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
-    // ✨ test away
-  })
-  it('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
-    // ✨ test away
-  })
-  it('[8] the count eventually reaches zero but does not go below zero', () => {
-    // ✨ test away
-  })
+  
+    let counter
+
+    beforeEach(() => {
+        counter = new utils.Counter(3) // each test must start with a fresh counter
+    })
+
+    it('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
+        //The first call of countdown should return the number 3
+        let expected = 3
+        
+        //result
+        expect(counter.countDown()).toBe(expected)
+    })
+
+    it('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
+        //Expected return (per example)
+        let expected = 2
+        //Call Once
+        counter.countDown()
+        //Expect
+        expect(counter.countDown()).toBe(expected)
+    })
+
+    it('[8] the count eventually reaches zero but does not go below zero', () => {
+        //expected return ( per test )
+        let expected = 0
+        //Call 6 Times ( really push the limits )
+        for(let i = 0 ; i < 50 ; i++){
+            counter.countDown()
+        }
+        //expect
+        expect(counter.countDown()).toBe(0)
+
+    })
 })
 
 describe('[Exercise 5] Seasons', () => {
